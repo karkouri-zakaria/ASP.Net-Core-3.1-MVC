@@ -8,8 +8,8 @@
     of <span class="text-danger">@Model.ProductName</span> ?
 </h2>
 
-<form asp-action="Delete" asp-controller="Product" method="post">
+<form asp-action="Delete" asp-controller="Products" method="post">
     @Html.HiddenFor(m=>m.Id)
     <input type="submit" value="Confirm" class="btn btn-success" />
-    <a asp-action="Index" asp-controller="Product" class="btn btn-danger">Cancel</a>
+    <a asp-action="Index" asp-controller="Products" class="btn btn-danger">Cancel</a>
 </form>

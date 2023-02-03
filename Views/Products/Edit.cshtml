@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<form asp-action="Edit" asp-controller="Product" method="post">
+<form asp-action="Edit" asp-controller="Products" method="post">
     <table class="table table-hover table-bordered table-striped">
         <tr>
             <td>@Html.DisplayNameFor(x=>x.ProductName)</td>
@@ -29,7 +29,7 @@
         <tr>
             <td colspan="2">
                 <input type="submit" value="Save" class="btn btn-success" />
-                <a asp-action="Index" asp-controller="Product" class="btn btn-danger">Cancel</a>
+                <a asp-action="Index" asp-controller="Products" class="btn btn-danger">Cancel</a>
             </td>
         </tr>
     </table>
