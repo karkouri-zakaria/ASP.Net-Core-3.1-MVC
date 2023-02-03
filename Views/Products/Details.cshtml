@@ -1,0 +1,26 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Details</h1>
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <td>@Html.DisplayNameFor(x=>x.Id)</td>
+        <td>@Html.DisplayFor(x=>x.Id)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(x=>x.ProductName)</td>
+        <td>@Html.DisplayFor(x=>x.ProductName)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(x=>x.Price)</td>
+        <td>@Html.DisplayFor(x=>x.Price)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(x=>x.Quantity)</td>
+        <td>@Html.DisplayFor(x=>x.Quantity)</td>
+    </tr>
+</table>
+
+<a asp-action="Index" asp-controller="Product">Back</a>
