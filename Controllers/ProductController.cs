@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -12,6 +16,7 @@ namespace WebApp.Controllers
             this.db = db;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View(db.Products.ToList());
@@ -55,22 +60,65 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View(db.Products.Find(id));
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await db.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product prod)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Product product)
         {
+            if (id != product.Id)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                db.Products.Update(prod);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Update(product);
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                        throw;
+                }
+                return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(string searchString)
+        {
+            if (db.Products == null)
+            {
+                return Problem("Entity set 'db.Products'  is null.");
+            }
+
+            var product = from m in db.Products
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                product = product.Where(s => s.ProductName!.Contains(searchString));
+            }
+
+            return View(await product.ToListAsync());
         }
 
     }
 }
+    
