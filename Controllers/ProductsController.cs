@@ -17,19 +17,20 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(db.Products.ToList());
+            return View(await db.Products.ToListAsync());
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View(db.Products.Find(id));
+            return View(await db.Products.FindAsync(id));
         }
 
         [HttpGet]
-        public IActionResult Create() {
-            
+        public IActionResult Create()
+        {
+
             return View();
         }
 
@@ -46,9 +47,9 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View(db.Products.Find(id));
+            return View(await db.Products.FindAsync(id));
         }
 
         [HttpPost]

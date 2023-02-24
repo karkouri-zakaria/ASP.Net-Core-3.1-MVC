@@ -1,0 +1,36 @@
+﻿@model CartRow
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1>Edit</h1>
+
+<h4>Product Row</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Cart" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CartId" />
+            <div class="form-group">
+                <div>Cart Row :</div>
+                <div>@Html.DisplayFor(x => x.CartRowId)</div>
+                <div>Product :</div>
+                <div>@Html.DisplayFor(x => x.Id)</div>
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="input-group" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-action="Index" asp-controller="Cart" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

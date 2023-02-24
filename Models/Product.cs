@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
@@ -18,5 +19,7 @@ namespace WebApp.Models
         [Required(ErrorMessage = "No Product Quantity")]
         [Range(0,100)]
         public int Quantity { get; set; }
+            
+        public ICollection<CartRow> Rows { get; set; }
     }
 }

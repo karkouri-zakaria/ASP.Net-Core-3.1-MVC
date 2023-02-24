@@ -1,0 +1,15 @@
+﻿@model CartRow
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<h2 class="alert alert-primary">Confirm the delete 
+    of <span class="text-danger">@Model.Id</span> ?
+</h2>
+
+<form asp-controller="Cart" method="post">
+    <a asp-action="Delete_Confirmed" asp-controller="Cart" asp-route-id="@Model.Id" asp-route-cartid="@Model.CartId" class="btn btn-success">Confirm</a>
+    <a asp-action="Index" asp-controller="Cart" class="btn btn-danger">Cancel</a>
+</form>
+    
